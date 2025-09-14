@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Sync - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Added styles for side-by-side layout */
+    .hero-carousel {
+      display: flex;
+      justify-content: center;
+      gap: 20px; /* space between images */
+      margin-top: 20px;
+    }
+
+    .hero-carousel img {
+      width: 400px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav>
+      <div class="logo">✨ Dream Sync</div>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <div class="dropdown">
+          <a href="categories.html">Categories ▾</a>
+          <div class="dropdown-content">
+            <a href="categories.html#school">School</a>
+            <a href="categories.html#intermediate">Intermediate</a>
+            <a href="categories.html#diploma">Diploma</a>
+            <a href="categories.html#ug">Under Graduation</a>
+            <a href="categories.html#pg">Post Graduation</a>
+            <a href="categories.html#doctoral">Doctoral Studies</a>
+            <a href="categories.html#others">Other Options</a>
+          </div>
+        </div>
+        <a href="reviews.html">Reviews</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <button id="themeToggle" class="theme-toggle">Dark</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Images Side by Side -->
+  <section class="hero">
+    <h1>Welcome to Dream Sync</h1>
+    <p>Your One-Stop Personalized Career & Education Advisor 🌟</p>
+    <div class="hero-carousel">
+      <img src="https://i.pinimg.com/1200x/99/8f/26/998f262dacbef65ed355a6a00174e10e.jpg" alt="Career Image 1">
+      <img src="https://i.pinimg.com/1200x/83/2e/9f/832e9fe62440115d30b822cacee2288c.jpg" alt="Career Image 2">
+      <img src="https://i.pinimg.com/736x/c2/f6/86/c2f686367fbe006d282e6b874f61a7b0.jpg" alt="Career Image 3">
+    </div>
+  </section>
+
+  <!-- Career Tips -->
+  <section class="section">
+    <h2>Career Tips & Ideas</h2>
+    <div class="cards">
+      <div class="card">💡 Explore interdisciplinary careers that blend technology and creativity.</div>
+      <div class="card">📚 Focus on skill development alongside academics.</div>
+      <div class="card">🤝 Network with mentors and professionals early.</div>
+    </div>
+  </section>
+
+  <!-- Real-World Career Paths -->
+  <section class="section">
+    <h2>Real-World Career Paths</h2>
+    <div class="cards">
+      <div class="card">🚀 From Engineer to Startup Founder: Journey of Ananya.</div>
+      <div class="card">🎨 From College Artist to Global Designer: Story of Ravi.</div>
+      <div class="card">🔬 Researcher to Policy Maker: Inspiring Path of Meera.</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © Dream Sync | Helping you design your career ✨
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html> 
