@@ -1,93 +1,937 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dream Sync - Home</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* Added styles for side-by-side layout */
-    .hero-carousel {
-      display: flex;
-      justify-content: center;
-      gap: 20px; /* space between images */
-      margin-top: 20px;
-    }
-
-    .hero-carousel img {
-      width: 400px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamSync Advisor: Personalized Career & Education Guidance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            min-height: 100vh;
+            color: #232946;
+            line-height: 1.6;
+            transition: background 0.4s, color 0.4s;
+            overflow-x: hidden;
+        }
+        body.dark {
+            background: linear-gradient(135deg, #18181b 0%, #312e81 100%);
+            color: #f3f4f6;
+        }
+        /* Header and Navigation */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.4s;
+        }
+        body.dark header {
+            background: #23233a;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        nav > div.nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        nav a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s;
+        }
+        nav a:hover, nav a.active {
+            background: #e0e7ff;
+            color: #6366f1;
+        }
+        body.dark nav a {
+            color: #e0e0e0;
+        }
+        body.dark nav a:hover, body.dark nav a.active {
+            background: #312e81;
+            color: #a5b4fc;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #ffffff;
+            min-width: 220px;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+            border-radius: 12px;
+            top: 100%;
+            left: 0;
+            z-index: 100;
+            padding: 0.5rem 0;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #374151;
+            font-weight: 400;
+            border-radius: 0;
+        }
+        .dropdown-content a:hover {
+            background: #e0e7ff;
+            color: #6366f1;
+        }
+        body.dark .dropdown-content {
+            background: #23233a;
+        }
+        body.dark .dropdown-content a {
+            color: #e0e0e0;
+        }
+        body.dark .dropdown-content a:hover {
+            background: #312e81;
+            color: #a5b4fc;
+        }
+        /* Theme Toggle */
+        .theme-toggle-switch {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+            border-radius: 999px;
+            padding: 0.3rem;
+            cursor: pointer;
+            position: relative;
+            width: 110px;
+            height: 44px;
+            border: none;
+            box-shadow: 0 2px 12px rgba(161, 140, 209, 0.15);
+            transition: background 0.4s;
+        }
+        .theme-toggle-switch .toggle-label {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            user-select: none;
+            z-index: 2;
+            padding: 0 0.5rem;
+        }
+        .theme-toggle-switch .toggle-slider {
+            width: 36px;
+            height: 36px;
+            background: #ffffff;
+            border-radius: 50%;
+            position: absolute;
+            left: 4px;
+            top: 4px;
+            transition: transform 0.4s cubic-bezier(0.4, 2.2, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        body.dark .theme-toggle-switch {
+            background: linear-gradient(90deg, #232526 0%, #414345 100%);
+        }
+        body.dark .theme-toggle-switch .toggle-slider {
+            transform: translateX(62px);
+            background: #6366f1;
+        }
+        body.dark .theme-toggle-switch .toggle-label.light {
+            color: #888888;
+        }
+        body.dark .theme-toggle-switch .toggle-label.dark {
+            color: #ffffff;
+        }
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quiz-option {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .quiz-option:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.2);
+        }
+        .path-line {
+            position: relative;
+            padding-left: 40px;
+            border-left: 3px dashed #a5b4fc;
+            margin-bottom: 1rem;
+        }
+        .path-line::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #6366f1;
+            border: 3px solid #ffffff;
+        }
+        .path-line:last-child {
+            border-left: none;
+        }
+        .path-line:last-child::before {
+            left: -10px;
+        }
+        body.dark .path-line {
+            border-left: 3px dashed #312e81;
+        }
+        body.dark .path-line::before {
+            background-color: #a5b4fc;
+            border: 3px solid #23233a;
+        }
+        /* Cards and Sections */
+        .section {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 24px rgba(99, 102, 241, 0.1);
+            transition: background 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        body.dark .section {
+            background: #23233a;
+            box-shadow: 0 4px 24px rgba(99, 102, 241, 0.2);
+        }
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #6366f1, #a18cd1);
+            border-radius: 1.5rem 1.5rem 0 0;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: linear-gradient(135deg, #e0e7ff 0%, #fbc2eb 100%);
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            color: #232946;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+        }
+        body.dark .card {
+            background: linear-gradient(135deg, #312e81 0%, #23233a 100%);
+            color: #e0e0e0;
+        }
+        body.dark .card:hover {
+            background: linear-gradient(135deg, #6366f1 0%, #a18cd1 100%);
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        /* Buttons */
+        button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            background: #6366f1;
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+            position: relative;
+        }
+        body.dark .modal-content {
+            background: #23233a;
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: #888888;
+            cursor: pointer;
+        }
+        body.dark .close-modal {
+            color: #a5b4fc;
+        }
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid #e0e7ff;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.75rem 0;
+            z-index: 20;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            transition: background 0.4s;
+        }
+        body.dark .bottom-nav {
+            background: #23233a;
+            border-top: 1px solid #312e81;
+        }
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6366f1;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        body.dark .nav-btn {
+            color: #a5b4fc;
+        }
+        /* Animations */
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .nav-links {
+                justify-content: center;
+                width: 100%;
+            }
+            .dropdown-content {
+                left: 50%;
+                transform: translateX(-50%);
+                min-width: 180px;
+            }
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <header>
-    <nav>
-      <div class="logo">✨ Dream Sync</div>
-      <div>
-        <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
-        <div class="dropdown">
-          <a href="categories.html">Categories ▾</a>
-          <div class="dropdown-content">
-            <a href="categories.html#school">School</a>
-            <a href="categories.html#intermediate">Intermediate</a>
-            <a href="categories.html#diploma">Diploma</a>
-            <a href="categories.html#ug">Under Graduation</a>
-            <a href="categories.html#pg">Post Graduation</a>
-            <a href="categories.html#doctoral">Doctoral Studies</a>
-            <a href="categories.html#others">Other Options</a>
-          </div>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://via.placeholder.com/40x40?text=DS" alt="DreamSync Logo">
+                ✨ DreamSync Advisor
+            </div>
+            <div class="nav-links">
+                <a href="#" onclick="navigateTo('home')" class="active">Home</a>
+                <a href="#" onclick="navigateTo('explore')">Explore</a>
+                <a href="#" onclick="navigateTo('colleges')">Colleges</a>
+                <a href="#" onclick="navigateTo('timeline')">Timeline</a>
+                <div class="dropdown">
+                    <a href="#">Categories ▾</a>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="navigateTo('school')">School</a>
+                        <a href="#" onclick="navigateTo('intermediate')">Intermediate</a>
+                        <a href="#" onclick="navigateTo('under-graduation')">Under Graduation</a>
+                        <a href="#" onclick="navigateTo('post-graduation')">Post Graduation</a>
+                        <a href="#" onclick="navigateTo('other-paths')">Other Career Paths</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#">More ▾</a>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="navigateTo('personality')">Personality Test</a>
+                        <a href="#" onclick="navigateTo('skills')">Skills Assessment</a>
+                        <a href="#" onclick="navigateTo('feedback')">Feedback</a>
+                    </div>
+                </div>
+            </div>
+            <button id="themeToggle" class="theme-toggle-switch" aria-label="Toggle dark mode">
+                <span class="toggle-label light">Light</span>
+                <span class="toggle-slider"></span>
+                <span class="toggle-label dark">Dark</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section id="home" class="page active section">
+            <div class="hero-content text-center">
+                <lottie-player src="https://lottie.host/3b5c3f60-7d0a-4b8b-b1a2-5c2a0e7f1b2e/career-path.json" background="transparent" speed="1" style="width: 300px; margin: 0 auto;" loop autoplay></lottie-player>
+                <h2 class="text-3xl font-bold mb-4 animate__animated animate__fadeInUp">Unlock Your Dream Career with DreamSync Advisor</h2>
+                <p class="mb-6 max-w-2xl mx-auto">Discover personalized paths based on your interests, skills, and aspirations. From school to professional success!</p>
+                <button onclick="navigateTo('quiz')" class="w-full md:w-auto"><i class="fas fa-rocket mr-2"></i> Start Aptitude & Interest Test</button>
+            </div>
+            <div class="cards mt-8">
+                <div onclick="navigateTo('explore')" class="card">
+                    <img src="https://images.unsplash.com/photo-1516321310764-4d383dd9e23e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Explore Careers">
+                    <i class="fas fa-compass text-2xl mb-2"></i> Explore Careers & Streams
+                </div>
+                <div onclick="navigateTo('colleges')" class="card">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Top Colleges">
+                    <i class="fas fa-university text-2xl mb-2"></i> Find Top Colleges
+                </div>
+                <div onclick="navigateTo('timeline')" class="card">
+                    <img src="https://images.unsplash.com/photo-1617791160505-6f00504e4570?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Timelines">
+                    <i class="fas fa-calendar-alt text-2xl mb-2"></i> Key Dates & Timelines
+                </div>
+                <div onclick="navigateTo('skills')" class="card">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Skills Assessment">
+                    <i class="fas fa-tools text-2xl mb-2"></i> Skills Assessment
+                </div>
+            </div>
+        </section>
+
+        <!-- Aptitude Quiz Page -->
+        <section id="quiz" class="page section">
+            <h2 class="text-2xl font-bold mb-6 animate__animated animate__fadeInLeft">Aptitude & Interest Assessment</h2>
+            <div id="quiz-container"></div>
+            <div id="quiz-progress" class="mt-4 text-center"></div>
+        </section>
+
+        <!-- Results Page -->
+        <section id="results" class="page section">
+            <div class="text-center">
+                <i class="fas fa-award text-6xl text-green-500 mb-4 animate__animated animate__fadeIn"></i>
+                <h2 class="text-3xl font-bold mb-2">Your Personalized Career Recommendations!</h2>
+                <p class="mb-4">Based on your responses, here's what suits you best:</p>
+                <h3 id="result-stream" class="text-4xl font-extrabold text-green-600 bg-green-100 py-2 px-4 rounded-lg inline-block mb-4"></h3>
+                <p id="result-description" class="text-lg mb-6"></p>
+                <div id="result-personality" class="mb-6"></div>
+                <button onclick="exploreRecommendedStream()" class="mr-2"><i class="fas fa-arrow-right mr-2"></i> Explore in This Stream</button>
+                <button onclick="navigateTo('quiz')"><i class="fas fa-redo mr-2"></i> Retake Test</button>
+            </div>
+        </section>
+
+        <!-- Explore Page -->
+        <section id="explore" class="page section">
+            <h2 class="text-2xl font-bold mb-4 animate__animated animate__fadeInLeft">Explore Career Paths & Courses</h2>
+            <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 p-2 rounded-lg">
+                <button id="filter-all" onclick="filterCourses('all')" class="filter-btn flex-1 py-2 px-4 text-sm font-semibold rounded-md bg-blue-600 text-white">All</button>
+                <button id="filter-science" onclick="filterCourses('Science')" class="filter-btn flex-1 py-2 px-4 text-sm font-semibold rounded-md text-slate-600">Science</button>
+                <button id="filter-commerce" onclick="filterCourses('Commerce')" class="filter-btn flex-1 py-2 px-4 text-sm font-semibold rounded-md text-slate-600">Commerce</button>
+                <button id="filter-arts" onclick="filterCourses('Arts')" class="filter-btn flex-1 py-2 px-4 text-sm font-semibold rounded-md text-slate-600">Arts</button>
+                <button id="filter-engineering" onclick="filterCourses('Engineering')" class="filter-btn flex-1 py-2 px-4 text-sm font-semibold rounded-md text-slate-600">Engineering</button>
+                <button id="filter-medical" onclick="filterCourses('Medical')" class="filter-btn flex-1 py-2 px-4 text-sm font-semibold rounded-md text-slate-600">Medical</button>
+                <button id="filter-law" onclick="filterCourses('Law')" class="filter-btn flex-1 py-2 px-4 text-sm font-semibold rounded-md text-slate-600">Law</button>
+            </div>
+            <div id="courses-container" class="cards"></div>
+        </section>
+
+        <!-- Colleges Page -->
+        <section id="colleges" class="page section">
+            <h2 class="text-2xl font-bold mb-4 animate__animated animate__fadeInLeft">Discover Top Colleges & Institutions</h2>
+            <div class="relative mb-4">
+                <input type="text" id="college-search" onkeyup="renderColleges()" placeholder="Search by name, location, or course..." class="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            </div>
+            <div id="colleges-container" class="cards"></div>
+        </section>
+
+        <!-- Timeline Page -->
+        <section id="timeline" class="page section">
+            <h2 class="text-2xl font-bold mb-6 animate__animated animate__fadeInLeft">Important Dates, Exams & Timelines</h2>
+            <div id="timeline-container" class="space-y-6"></div>
+        </section>
+
+        <!-- Skills Assessment Page -->
+        <section id="skills" class="page section">
+            <h2 class="text-2xl font-bold mb-6 animate__animated animate__fadeInLeft">Skills Assessment Tool</h2>
+            <p class="mb-4">Rate your skills on a scale of 1-5 to get tailored advice.</p>
+            <div id="skills-form" class="space-y-4"></div>
+            <button onclick="submitSkills()" class="mt-6">Submit & Get Insights</button>
+            <div id="skills-results" class="mt-6 hidden"></div>
+        </section>
+
+        <!-- New Category Pages -->
+        <section id="school" class="page section">
+            <h2 class="text-2xl font-bold mb-4 animate__animated animate__fadeInLeft">School Education Guidance</h2>
+            <p class="mb-6">Explore resources and guidance for school-level education, including subject selection and extracurricular activities.</p>
+            <div class="cards">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="School Programs">
+                    <h3 class="font-semibold text-lg">Subject Selection</h3>
+                    <p>Choose the right subjects to align with your career goals.</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Extracurriculars">
+                    <h3 class="font-semibold text-lg">Extracurricular Activities</h3>
+                    <p>Discover activities to boost your skills and resume.</p>
+                </div>
+            </div>
+        </section>
+        <section id="intermediate" class="page section">
+            <h2 class="text-2xl font-bold mb-4 animate__animated animate__fadeInLeft">Intermediate Education Guidance</h2>
+            <p class="mb-6">Get advice on stream selection and preparation for competitive exams at the intermediate level.</p>
+            <div class="cards">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516321310764-4d383dd9e23e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Stream Selection">
+                    <h3 class="font-semibold text-lg">Stream Selection</h3>
+                    <p>Guidance on choosing Science, Commerce, or Arts streams.</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1617791160505-6f00504e4570?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Exam Prep">
+                    <h3 class="font-semibold text-lg">Exam Preparation</h3>
+                    <p>Tips and resources for board and entrance exams.</p>
+                </div>
+            </div>
+        </section>
+        <section id="under-graduation" class="page section">
+            <h2 class="text-2xl font-bold mb-4 animate__animated animate__fadeInLeft">Undergraduate Programs</h2>
+            <p class="mb-6">Find the best undergraduate courses and colleges to kickstart your career.</p>
+            <div class="cards">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="UG Courses">
+                    <h3 class="font-semibold text-lg">Course Selection</h3>
+                    <p>Explore undergraduate programs across streams.</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="College Applications">
+                    <h3 class="font-semibold text-lg">College Applications</h3>
+                    <p>Learn how to apply to top colleges effectively.</p>
+                </div>
+            </div>
+        </section>
+        <section id="post-graduation" class="page section">
+            <h2 class="text-2xl font-bold mb-4 animate__animated animate__fadeInLeft">Postgraduate Programs</h2>
+            <p class="mb-6">Discover postgraduate opportunities to advance your career.</p>
+            <div class="cards">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516321310764-4d383dd9e23e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="PG Courses">
+                    <h3 class="font-semibold text-lg">Masters Programs</h3>
+                    <p>Explore M.Sc., MBA, LLM, and more.</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1617791160505-6f00504e4570?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Research Opportunities">
+                    <h3 class="font-semibold text-lg">Research Opportunities</h3>
+                    <p>Find PhD and research programs.</p>
+                </div>
+            </div>
+        </section>
+        <section id="other-paths" class="page section">
+            <h2 class="text-2xl font-bold mb-4 animate__animated animate__fadeInLeft">Other Career Paths</h2>
+            <p class="mb-6">Explore alternative education and career options like vocational training and certifications.</p>
+            <div class="cards">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Vocational Training">
+                    <h3 class="font-semibold text-lg">Vocational Training</h3>
+                    <p>Learn about skill-based training programs.</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Certifications">
+                    <h3 class="font-semibold text-lg">Certifications</h3>
+                    <p>Boost your resume with professional certifications.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- College Detail Modal -->
+        <div id="college-modal" class="modal">
+            <div class="modal-content">
+                <i class="fas fa-times close-modal" onclick="closeModal()"></i>
+                <h3 id="modal-college-name" class="text-2xl font-bold text-blue-600 mb-2"></h3>
+                <p id="modal-college-location" class="text-slate-500 mb-4 flex items-center"><i class="fas fa-map-marker-alt mr-2"></i><span></span></p>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-lg">Courses Offered</h4>
+                        <ul id="modal-college-courses" class="list-disc list-inside text-slate-600 mt-1"></ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-lg">Facilities</h4>
+                        <div id="modal-college-facilities" class="flex flex-wrap gap-2 mt-2"></div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-lg">Admission Info</h4>
+                        <p id="modal-college-admission" class="text-slate-600"></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <a href="reviews.html">Reviews</a>
-        <a href="feedback.html">Feedback</a>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact Us</a>
-      </div>
-      <button id="themeToggle" class="theme-toggle">Dark</button>
+    </main>
+
+    <!-- Bottom Navigation for Mobile -->
+    <nav class="bottom-nav">
+        <a href="#" onclick="navigateTo('home')" class="nav-btn"><i class="fas fa-home text-xl"></i> Home</a>
+        <a href="#" onclick="navigateTo('explore')" class="nav-btn"><i class="fas fa-compass text-xl"></i> Explore</a>
+        <a href="#" onclick="navigateTo('colleges')" class="nav-btn"><i class="fas fa-university text-xl"></i> Colleges</a>
+        <a href="#" onclick="navigateTo('timeline')" class="nav-btn"><i class="fas fa-calendar-alt text-xl"></i> Timeline</a>
     </nav>
-  </header>
 
-  <!-- Hero Section with Images Side by Side -->
-  <section class="hero">
-    <h1>Welcome to Dream Sync</h1>
-    <p>Your One-Stop Personalized Career & Education Advisor 🌟</p>
-    <div class="hero-carousel">
-      <img src="https://i.pinimg.com/1200x/99/8f/26/998f262dacbef65ed355a6a00174e10e.jpg" alt="Career Image 1">
-      <img src="https://i.pinimg.com/1200x/83/2e/9f/832e9fe62440115d30b822cacee2288c.jpg" alt="Career Image 2">
-      <img src="https://i.pinimg.com/736x/c2/f6/86/c2f686367fbe006d282e6b874f61a7b0.jpg" alt="Career Image 3">
-    </div>
-  </section>
+    <script>
+        // Expanded Data Sets
+        const quizData = [
+            { question: "Which activities spark your passion?", options: [{text: "Experimenting with science or tech", stream: "Science"}, {text: "Managing finances or business strategies", stream: "Commerce"}, {text: "Creative writing, arts, or social issues", stream: "Arts"}, {text: "Building machines or coding", stream: "Engineering"}, {text: "Helping people with health or biology", stream: "Medical"}, {text: "Debating laws or ethics", stream: "Law"}] },
+            { question: "How do you approach problems?", options: [{text: "Logical analysis and data", stream: "Science"}, {text: "Practical and profitable solutions", stream: "Commerce"}, {text: "Human-centric and historical views", stream: "Arts"}, {text: "Innovative designs and prototypes", stream: "Engineering"}, {text: "Diagnostic and caring methods", stream: "Medical"}, {text: "Legal arguments and justice", stream: "Law"}] },
+            { question: "Favorite subjects?", options: [{text: "Physics/Chemistry/Maths", stream: "Science"}, {text: "Economics/Business", stream: "Commerce"}, {text: "History/Literature", stream: "Arts"}, {text: "Computer Science/Mechanics", stream: "Engineering"}, {text: "Biology/Anatomy", stream: "Medical"}, {text: "Political Science/Law", stream: "Law"}] },
+            { question: "Dream work environment?", options: [{text: "Lab or research center", stream: "Science"}, {text: "Corporate office or startup", stream: "Commerce"}, {text: "Studio, school, or NGO", stream: "Arts"}, {text: "Tech firm or workshop", stream: "Engineering"}, {text: "Hospital or clinic", stream: "Medical"}, {text: "Courtroom or law firm", stream: "Law"}] },
+            { question: "Impact you want to make?", options: [{text: "Scientific discoveries", stream: "Science"}, {text: "Economic growth", stream: "Commerce"}, {text: "Social change or art", stream: "Arts"}, {text: "Technological innovations", stream: "Engineering"}, {text: "Health improvements", stream: "Medical"}, {text: "Justice and policy", stream: "Law"}] },
+            { question: "Preferred learning style?", options: [{text: "Hands-on experiments", stream: "Science"}, {text: "Case studies and numbers", stream: "Commerce"}, {text: "Discussions and essays", stream: "Arts"}, {text: "Projects and coding", stream: "Engineering"}, {text: "Clinical practice", stream: "Medical"}, {text: "Debates and research", stream: "Law"}] },
+            { question: "What excites you most?", options: [{text: "Solving complex equations", stream: "Science"}, {text: "Market trends and investments", stream: "Commerce"}, {text: "Cultural stories and languages", stream: "Arts"}, {text: "Building apps or robots", stream: "Engineering"}, {text: "Human body and diseases", stream: "Medical"}, {text: "Rights and legal cases", stream: "Law"}] },
+            { question: "Ideal future role?", options: [{text: "Scientist or researcher", stream: "Science"}, {text: "CEO or accountant", stream: "Commerce"}, {text: "Writer or teacher", stream: "Arts"}, {text: "Engineer or developer", stream: "Engineering"}, {text: "Doctor or nurse", stream: "Medical"}, {text: "Lawyer or judge", stream: "Law"}] },
+        ];
 
-  <!-- Career Tips -->
-  <section class="section">
-    <h2>Career Tips & Ideas</h2>
-    <div class="cards">
-      <div class="card">💡 Explore interdisciplinary careers that blend technology and creativity.</div>
-      <div class="card">📚 Focus on skill development alongside academics.</div>
-      <div class="card">🤝 Network with mentors and professionals early.</div>
-    </div>
-  </section>
+        const coursesData = [
+            { name: "B.Sc. Physics", stream: "Science", desc: "Core physics for research and tech.", paths: [{title: "Higher Studies", options: ["M.Sc. Physics", "PhD Research", "Data Analytics"]}, {title: "Jobs", options: ["Physicist", "Data Scientist", "Teacher"]}, {title: "Exams", options: ["GATE", "UPSC", "NET"]}] },
+            { name: "B.Tech Computer Science", stream: "Engineering", desc: "Software development and AI.", paths: [{title: "Higher Studies", options: ["M.Tech CS", "MBA Tech", "MS Abroad"]}, {title: "Jobs", options: ["Software Engineer", "AI Specialist", "Cyber Security"]}, {title: "Exams", options: ["GATE", "CAT", "GRE"]}] },
+            { name: "MBBS", stream: "Medical", desc: "Medical degree for doctors.", paths: [{title: "Higher Studies", options: ["MD/MS", "Specializations"]}, {title: "Jobs", options: ["Doctor", "Surgeon", "Researcher"]}, {title: "Exams", options: ["NEET PG", "USMLE"]}] },
+            { name: "B.Com Accounting", stream: "Commerce", desc: "Finance and accounting expertise.", paths: [{title: "Higher Studies", options: ["M.Com", "CA", "MBA Finance"]}, {title: "Jobs", options: ["Accountant", "Auditor", "Banker"]}, {title: "Exams", options: ["CA Exam", "UPSC", "Bank PO"]}] },
+            { name: "B.A. Literature", stream: "Arts", desc: "Creative writing and analysis.", paths: [{title: "Higher Studies", options: ["M.A. English", "Journalism"]}, {title: "Jobs", options: ["Writer", "Editor", "Teacher"]}, {title: "Exams", options: ["UPSC", "NET"]}] },
+            { name: "LLB", stream: "Law", desc: "Legal studies for advocacy.", paths: [{title: "Higher Studies", options: ["LLM", "Judicial Services"]}, {title: "Jobs", options: ["Lawyer", "Corporate Counsel", "Judge"]}, {title: "Exams", options: ["CLAT PG", "Judiciary Exam"]}] },
+            { name: "B.Sc. Chemistry", stream: "Science", desc: "Chemical sciences and industries.", paths: [{title: "Higher Studies", options: ["M.Sc. Chemistry", "Pharma Courses"]}, {title: "Jobs", options: ["Chemist", "Quality Control", "Researcher"]}, {title: "Exams", options: ["GATE", "CSIR NET"]}] },
+            { name: "B.E. Mechanical", stream: "Engineering", desc: "Machinery and design.", paths: [{title: "Higher Studies", options: ["M.E. Mechanical", "MBA"]}, {title: "Jobs", options: ["Mechanical Engineer", "Automotive Designer"]}, {title: "Exams", options: ["GATE", "IES"]}] },
+        ];
 
-  <!-- Real-World Career Paths -->
-  <section class="section">
-    <h2>Real-World Career Paths</h2>
-    <div class="cards">
-      <div class="card">🚀 From Engineer to Startup Founder: Journey of Ananya.</div>
-      <div class="card">🎨 From College Artist to Global Designer: Story of Ravi.</div>
-      <div class="card">🔬 Researcher to Policy Maker: Inspiring Path of Meera.</div>
-    </div>
-  </section>
+        const collegesData = [
+            { name: "IIT Bombay", location: "Mumbai, Maharashtra", courses: ["B.Tech CS", "B.Sc. Physics", "B.E. Mechanical"], facilities: ["Hostel", "Library", "Labs", "Sports", "Research Centers"], admission: "Via JEE Advanced, Cutoff: Top 1%." },
+            { name: "AIIMS Delhi", location: "New Delhi", courses: ["MBBS", "B.Sc. Nursing"], facilities: ["Hospital", "Library", "Hostel", "Research"], admission: "Via NEET, Highly Competitive." },
+            { name: "NLSIU Bangalore", location: "Bangalore, Karnataka", courses: ["LLB", "LLM"], facilities: ["Moot Court", "Library", "Hostel"], admission: "Via CLAT." },
+            { name: "IIM Ahmedabad", location: "Ahmedabad, Gujarat", courses: ["B.Com", "MBA"], facilities: ["Campus", "Library", "Placements"], admission: "Via CAT." },
+            { name: "Delhi University", location: "New Delhi", courses: ["B.A. Literature", "B.Sc. Chemistry"], facilities: ["Hostel", "Sports", "Cultural Clubs"], admission: "Via CUET." },
+            { name: "BITS Pilani", location: "Pilani, Rajasthan", courses: ["B.Tech", "B.Sc."], facilities: ["Labs", "Hostel", "Innovation Center"], admission: "Via BITSAT." },
+        ];
 
-  <!-- Footer -->
-  <footer>
-    © Dream Sync | Helping you design your career ✨
-  </footer>
+        const timelineData = [
+            { title: "JEE Main 2026 Session 1", date: "January 2026", desc: "Entrance for engineering colleges.", type: "exam" },
+            { title: "NEET 2026", date: "May 2026", desc: "Medical entrance exam.", type: "exam" },
+            { title: "CLAT 2026", date: "December 2025", desc: "Law entrance test.", type: "exam" },
+            { title: "CAT 2025", date: "November 2025", desc: "MBA entrance.", type: "exam" },
+            { title: "Scholarship Applications Open", date: "August 2025", desc: "National scholarships for students.", type: "scholarship" },
+            { title: "College Admissions Start", date: "June 2026", desc: "Post-exam counseling.", type: "admission" },
+            { title: "GATE 2026", date: "February 2026", desc: "For PG engineering.", type: "exam" },
+        ];
 
-  <script src="script.js"></script>
+        const skillsData = [
+            "Problem Solving", "Communication", "Leadership", "Technical Skills", "Creativity", "Analytical Thinking", "Teamwork", "Time Management"
+        ];
+
+        // State
+        let currentPage = 'home';
+        let currentQuestionIndex = 0;
+        let scores = { Science: 0, Commerce: 0, Arts: 0, Engineering: 0, Medical: 0, Law: 0 };
+        let recommendedStream = '';
+        let skillsScores = {};
+
+        // Navigation
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.querySelector(`nav a[onclick="navigateTo('${pageId}')"]`)?.classList.add('active');
+            currentPage = pageId;
+            window.scrollTo(0, 0);
+
+            if (pageId === 'quiz') startQuiz();
+            if (pageId === 'explore') renderCourses();
+            if (pageId === 'colleges') renderColleges();
+            if (pageId === 'timeline') renderTimeline();
+            if (pageId === 'skills') renderSkillsForm();
+        }
+
+        // Quiz Logic
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            scores = { Science: 0, Commerce: 0, Arts: 0, Engineering: 0, Medical: 0, Law: 0 };
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const container = document.getElementById('quiz-container');
+            const progress = document.getElementById('quiz-progress');
+            if (currentQuestionIndex < quizData.length) {
+                const q = quizData[currentQuestionIndex];
+                container.innerHTML = `
+                    <div class="card p-6 animate__animated animate__fadeIn">
+                        <p class="text-sm font-semibold text-blue-600 mb-2">Question ${currentQuestionIndex + 1}/${quizData.length}</p>
+                        <h3 class="text-xl font-semibold mb-6">${q.question}</h3>
+                        <div class="space-y-3">
+                            ${q.options.map(opt => `
+                                <button onclick="selectAnswer('${opt.stream}')" class="quiz-option w-full text-left p-4 bg-slate-50 border rounded-lg hover:bg-blue-100 hover:border-blue-500 transition">
+                                    ${opt.text}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                progress.innerHTML = `<progress value="${currentQuestionIndex + 1}" max="${quizData.length}" class="w-full h-2"></progress>`;
+            } else {
+                showResults();
+            }
+        }
+
+        function selectAnswer(stream) {
+            scores[stream]++;
+            currentQuestionIndex++;
+            displayQuestion();
+        }
+
+        function showResults() {
+            const maxScore = Math.max(...Object.values(scores));
+            recommendedStream = Object.keys(scores).find(key => scores[key] === maxScore);
+
+            document.getElementById('result-stream').innerText = recommendedStream;
+            let desc = '';
+            if (recommendedStream === 'Science') desc = 'Ideal for innovators and analysts. Careers in research, tech, and academia await.';
+            if (recommendedStream === 'Commerce') desc = 'Suited for business minds. Excel in finance, management, and entrepreneurship.';
+            if (recommendedStream === 'Arts') desc = 'For creative souls. Thrive in media, education, and social services.';
+            if (recommendedStream === 'Engineering') desc = 'Builders and problem-solvers. Opportunities in tech, manufacturing, and design.';
+            if (recommendedStream === 'Medical') desc = 'Compassionate helpers. Paths to healthcare, research, and wellness.';
+            if (recommendedStream === 'Law') desc = 'Advocates for justice. Careers in legal practice, policy, and governance.';
+            document.getElementById('result-description').innerText = desc;
+
+            document.getElementById('result-personality').innerHTML = `<p class="font-semibold">Personality Match:</p><p>${getPersonalityInsight(recommendedStream)}</p>`;
+
+            navigateTo('results');
+        }
+
+        function getPersonalityInsight(stream) {
+            const insights = {
+                Science: 'Analytical and curious, like Einstein.',
+                Commerce: 'Strategic and ambitious, like Warren Buffett.',
+                Arts: 'Creative and empathetic, like Maya Angelou.',
+                Engineering: 'Innovative and practical, like Elon Musk.',
+                Medical: 'Caring and detail-oriented, like Florence Nightingale.',
+                Law: 'Persuasive and ethical, like Ruth Bader Ginsburg.'
+            };
+            return insights[stream] || 'Versatile and adaptable.';
+        }
+
+        function exploreRecommendedStream() {
+            navigateTo('explore');
+            filterCourses(recommendedStream);
+        }
+
+        // Explore Logic
+        function renderCourses(streamFilter = 'all') {
+            const container = document.getElementById('courses-container');
+            const filtered = streamFilter === 'all' ? coursesData : coursesData.filter(c => c.stream === streamFilter);
+            container.innerHTML = filtered.map(course => `
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516321310764-4d383dd9e23e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="${course.name}">
+                    <h3 class="text-xl font-bold text-blue-700">${course.name}</h3>
+                    <span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">${course.stream}</span>
+                    <p class="my-3">${course.desc}</p>
+                    <div class="space-y-2">
+                        ${course.paths.map(path => `
+                            <div class="path-line">
+                                <h4 class="font-semibold">${path.title}</h4>
+                                <div class="flex flex-wrap gap-2 mt-1">
+                                    ${path.options.map(opt => `<span class="text-sm bg-slate-100 px-2 py-1 rounded">${opt}</span>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCourses(stream) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-slate-600');
+            });
+            const btn = document.getElementById(`filter-${stream.toLowerCase()}`) || document.getElementById('filter-all');
+            if (btn) {
+                btn.classList.add('bg-blue-600', 'text-white');
+                btn.classList.remove('text-slate-600');
+            }
+            renderCourses(stream);
+        }
+
+        // Colleges Logic
+        function renderColleges() {
+            const searchTerm = document.getElementById('college-search').value.toLowerCase();
+            const container = document.getElementById('colleges-container');
+            const filtered = collegesData.filter(c => 
+                c.name.toLowerCase().includes(searchTerm) || 
+                c.location.toLowerCase().includes(searchTerm) || 
+                c.courses.some(course => course.toLowerCase().includes(searchTerm))
+            );
+            container.innerHTML = filtered.length ? filtered.map((c, i) => `
+                <div onclick="openCollegeModal(${i})" class="card">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="${c.name}">
+                    <h3 class="font-semibold text-lg">${c.name}</h3>
+                    <p class="text-sm flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>${c.location}</p>
+                </div>
+            `).join('') : '<p class="text-center">No results found.</p>';
+        }
+
+        function openCollegeModal(index) {
+            const c = collegesData[index];
+            document.getElementById('modal-college-name').innerText = c.name;
+            document.getElementById('modal-college-location').querySelector('span').innerText = c.location;
+            document.getElementById('modal-college-courses').innerHTML = c.courses.map(course => `<li>${course}</li>`).join('');
+            document.getElementById('modal-college-facilities').innerHTML = c.facilities.map(f => `<span class="bg-blue-100 text-blue-800 text-sm px-2.5 py-0.5 rounded-full">${f}</span>`).join('');
+            document.getElementById('modal-college-admission').innerText = c.admission;
+            document.getElementById('college-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('college-modal').classList.remove('active');
+        }
+
+        // Timeline Logic
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            container.innerHTML = timelineData.map(item => {
+                let icon = 'fas fa-calendar-check text-blue-500';
+                if (item.type === 'scholarship') icon = 'fas fa-graduation-cap text-yellow-500';
+                if (item.type === 'exam') icon = 'fas fa-file-alt text-red-500';
+                if (item.type === 'admission') icon = 'fas fa-door-open text-green-500';
+                return `
+                    <div class="flex items-start space-x-4 bg-white p-4 rounded-lg shadow-md dark:bg-gray-800 animate__animated animate__fadeInUp">
+                        <div class="bg-slate-100 rounded-full h-12 w-12 flex items-center justify-center">
+                            <i class="${icon} text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">${item.title}</h3>
+                            <p class="text-sm text-slate-500">${item.date}</p>
+                            <p class="text-sm mt-1">${item.desc}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Skills Assessment
+        function renderSkillsForm() {
+            const form = document.getElementById('skills-form');
+            form.innerHTML = skillsData.map(skill => `
+                <div class="flex items-center justify-between animate__animated animate__fadeIn">
+                    <label>${skill}</label>
+                    <select id="skill-${skill.toLowerCase().replace(' ', '-')}">
+                        <option value="1">1 (Beginner)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5 (Expert)</option>
+                    </select>
+                </div>
+            `).join('');
+        }
+
+        function submitSkills() {
+            skillsData.forEach(skill => {
+                const id = `skill-${skill.toLowerCase().replace(' ', '-')}`;
+                skillsScores[skill] = document.getElementById(id).value;
+            });
+            const results = document.getElementById('skills-results');
+            results.classList.remove('hidden');
+            results.innerHTML = `<h3 class="font-bold mb-2">Your Skills Insights:</h3>
+                <p>Strong areas: ${getStrongSkills()}</p>
+                <p>Recommendations: Focus on ${getSkillRecommendations()}</p>`;
+        }
+
+        function getStrongSkills() {
+            return Object.entries(skillsScores).filter(([_, score]) => score >= 4).map(([skill]) => skill).join(', ') || 'None yet - keep building!';
+        }
+
+        function getSkillRecommendations() {
+            if (skillsScores['Technical Skills'] >= 4) return 'tech courses like coding bootcamps.';
+            if (skillsScores['Creativity'] >= 4) return 'arts or design programs.';
+            return 'balanced development across all areas.';
+        }
+
+        // Theme Toggle
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+        });
+
+        // Initial Load
+        window.onload = () => navigateTo('home');
+    </script>
 </body>
-</html> 
+</html>
+
+
